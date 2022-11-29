@@ -2,11 +2,10 @@ package com.shaw.phisher.utils;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 
 public class Command {
@@ -29,25 +28,22 @@ public class Command {
         return random30.toString();
     }
     public static void executePageKite() {
-        Operations.writeFile(inputFilePath, "\n"+getRandom(30)+"@gmail.com"+"\n\n\n"+"n\n");
+        Operations.writeFile(inputFilePath, "\n" + getRandom(30) + "@gmail.com" + "\n\n\n" + "n\n");
+        String user = System.getProperty("user.name");
+        String pythonPath = "C:\\Users\\" + user + "\\AppData\\Local\\Programs\\Python";
+        File file = new File(pythonPath);
+
+        if (!file.exists() && Objects.requireNonNull(file.list()).length == 0) {
+            System.out.println("Python installation not found, please install a version of python to run page-kite");
+            return;
+        }
+
+        Integer i = Arrays.stream(Objects.requireNonNull(file.list())).map(e -> Integer.parseInt(e.substring(e.lastIndexOf('n') + 1))).max(Integer::compare).get();
+
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c start cmd.exe /K \"C:\\Users\\8888h\\AppData\\Local\\Programs\\Python\\Python311\\python "+pageKiteFilePath+" 8080 "+getRandom(10)+".pagekite.me < "+inputFilePath+"\"");
-//           processBuilder.redirectInput(new File(inputFilePath));
-//           processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
-
-             Process process = processBuilder.start();
-
-//            process.waitFor();
-//            BufferedReader buf = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//            String line = "";
-//            StringBuilder output = new StringBuilder();
-//
-//            while ((line = buf.readLine()) != null) {
-//                output.append(line).append("\n");
-//            }
-//
-//            System.out.println(output);
-        }catch (Exception e){
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c start cmd.exe /K \"" + pythonPath + "\\Python" + i + "\\python " + pageKiteFilePath + " 8080 " + getRandom(10) + ".pagekite.me < " + inputFilePath + "\"");
+            Process process = processBuilder.start();
+        } catch (Exception e) {
             System.out.println(e);
         }
     }

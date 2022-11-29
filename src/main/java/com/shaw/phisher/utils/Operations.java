@@ -10,9 +10,10 @@ public class Operations {
     public static String activeFilePath = System.getProperty("user.home") + "/.phisher/.active";
 
     public static void writeFile(String path, String data){
+        File file = new File(System.getProperty("user.home") + "/.phisher");
+        file.mkdirs();
         try {
             File myObj = new File(path);
-//            myObj.mkdirs();
             if (!myObj.createNewFile()) {
                 try {
                     FileWriter myWriter = new FileWriter(path);

