@@ -44,7 +44,7 @@ public class PhisherApplication {
         System.out.println("\u001b[38;5;82m STARTED!\u001B[0m");
 
         if (choice == 2) {
-            System.out.print("\n\u001bStarting the PageKite ... \u001B[0m");
+            System.out.println("\n\u001b[38;5;220mStarting the PageKite ... \u001B[0m");
             Command.executePageKite();
         }
 
