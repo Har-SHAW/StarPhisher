@@ -24,7 +24,7 @@ public class Banner {
         for (String option : options) {
             System.out.printf("\u001b[38;5;220m" + "%" + 2 + "s", counter++);
             System.out.print(". " + "\u001b[38;5;201m" + String.format("%-" + 15 + "s", option) + "\t");
-            if ((counter - 1) % 3 == 0) {
+            if ((counter - 1) % 2 == 0) {
                 System.out.println();
             }
         }

